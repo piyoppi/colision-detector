@@ -1,0 +1,27 @@
+{
+  "name": "colision-detector",
+  "version": "0.0.1",
+  "description": "colision detection library for game development",
+  "main": "",
+  "scripts": {
+    "test": "jest -i"
+  },
+  "author": "piyoppi",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.7.0",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/runtime": "^7.3.4",
+    "babel-jest": "^24.1.0",
+    "jest": "^24.1.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "./"
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-import ColisionDetector from './colisionDetector.js'
+import ColisionDetector from '../src/colisionDetector.js'
 
 describe('#_makeLinearQuaternaryTree', () => {
   it('generate linear quaternary tree when level is 2', () => {
