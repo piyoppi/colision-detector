@@ -1,4 +1,4 @@
-import ColisionDetector from '../src/colisionDetector.js'
+import ColisionDetector from './colisionDetector.js'
 
 describe('#_makeLinearQuaternaryTree', () => {
   it('generate linear quaternary tree when level is 2', () => {
@@ -14,13 +14,13 @@ describe('#_makeLinearQuaternaryTree', () => {
   });
 });
 
-describe('#_convPositionToMortonNumber', () => {
+describe('#_convPositionToGridNumber', () => {
   const colisionDetector = new ColisionDetector(1000, 1000, 2);
   it('calculate a valid value', () => {
-    expect(colisionDetector._convPositionToMortonNumber([0, 0])).toEqual(0);
-    expect(colisionDetector._convPositionToMortonNumber([4, 3])).toEqual(26);
-    expect(colisionDetector._convPositionToMortonNumber([4, 6])).toEqual(56);
-    expect(colisionDetector._convPositionToMortonNumber([7, 7])).toEqual(63);
+    expect(colisionDetector._convPositionToGridNumber([0, 0])).toEqual(0);
+    expect(colisionDetector._convPositionToGridNumber([4, 3])).toEqual(26);
+    expect(colisionDetector._convPositionToGridNumber([4, 6])).toEqual(56);
+    expect(colisionDetector._convPositionToGridNumber([7, 7])).toEqual(63);
   });
 });
 

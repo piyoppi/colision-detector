@@ -50,14 +50,14 @@ export default class colisionDetector {
    *  @param {Boolean} isRemoveOnly
    */
   updateTree(item, isRemoveOnly = false){
-    let mortonInfo = this._convToAreaNumber(item);
-    let mortonTreeIdx;
+    let area = this._convToAreaNumber(item);
+    let treeIdx;
 
     if( item.position[0] < 0 || item.position[1] < 0 ||
         (item.position[0] + item.width) > this._fieldWidth || (item.position[1] + item.height) > this._fieldHeight ) {
-      mortonTreeIdx = 0;
+      treeIdx = 0;
     } else {
-      mortonTreeIdx = mortonInfo ? mortonInfo.mortonNum + ((Math.pow(4, mortonInfo.level)-1.0 ) / 3.0) : 0;
+      treeIdx = area ? area.areaNumber + ((Math.pow(4, area.level)-1.0 ) / 3.0) : 0;
     }
 
     if( !item.colisionState ) {
@@ -69,10 +69,10 @@ export default class colisionDetector {
       }
     }
 
-    if( item.colisionState.treeIndex === mortonTreeIdx && !isRemoveOnly ) return;
-    if( this._linearQuaternaryTree.length <= mortonTreeIdx ) return;
+    if( item.colisionState.treeIndex === treeIdx && !isRemoveOnly ) return;
+    if( this._linearQuaternaryTree.length <= treeIdx ) return;
 
-    let node = this._linearQuaternaryTree[mortonTreeIdx];
+    let node = this._linearQuaternaryTree[treeIdx];
     let registeredNode = this._linearQuaternaryTree[item.colisionState.treeIndex];
 
     // remove registersd the item when the item is already exist
@@ -115,7 +115,7 @@ export default class colisionDetector {
       node.length++;
     }
     this.length++;
-    item.colisionState.treeIndex = mortonTreeIdx;
+    item.colisionState.treeIndex = treeIdx;
     node.headItemID = settingId;
   }
 
@@ -151,10 +151,10 @@ export default class colisionDetector {
     const area = this._convToAreaNumber(rect);
 
     // move to upside level
-    let retItems = this._checkTreeAt(area.level-1, (area.mortonNum >> 2) & 3, rect, true);
+    let retItems = this._checkTreeAt(area.level-1, (area.areaNumber >> 2) & 3, rect, true);
 
     // move to next level
-    retItems = [...retItems, ...this._checkTreeAt(area.level, area.mortonNum, rect, false)];
+    retItems = [...retItems, ...this._checkTreeAt(area.level, area.areaNumber, rect, false)];
 
     return retItems;
   }
@@ -164,12 +164,12 @@ export default class colisionDetector {
    * (uses: detecting click)
    *
    * @param {Number} level
-   * @param {Number} mortonNum the number of a area
+   * @param {Number} areaNumber the number of a area
    * @param {Object} specificRect rectangle
    * @param {Boolean} isUpTree
    */
-  _checkTreeAt(level, mortonNum, specificRect, isUpTree) {
-    const idxQuaternaryTree = ((Math.pow(4, level)-1.0 ) / 3.0) + mortonNum;
+  _checkTreeAt(level, areaNumber, specificRect, isUpTree) {
+    const idxQuaternaryTree = ((Math.pow(4, level)-1.0 ) / 3.0) + areaNumber;
     if( idxQuaternaryTree < 0 ) return [];
 
     let procMortonNode = this._linearQuaternaryTree[idxQuaternaryTree];
@@ -191,11 +191,11 @@ export default class colisionDetector {
 
     if( isUpTree ){
       // move to upside level
-      hitItems = [...hitItems, ...this._checkTreeAt(level-1, (mortonNum >> 2) & 3, specificRect, isUpTree)];
+      hitItems = [...hitItems, ...this._checkTreeAt(level - 1, (areaNumber >> 2) & 3, specificRect, isUpTree)];
     } else {
       // move to next level
-      for( let j=0; j<4; j++ ){
-        hitItems = [...hitItems, ...this._checkTreeAt(level+1, 4*mortonNum+j, specificRect, isUpTree)];
+      for( let j = 0; j < 4; j++ ){
+        hitItems = [...hitItems, ...this._checkTreeAt(level + 1, 4 * areaNumber + j, specificRect, isUpTree)];
       }
     }
 
@@ -207,11 +207,11 @@ export default class colisionDetector {
    * Colision detection using tree
    * 
    * @params {Number} level tree level
-   * @params {Number} mortonNum area number in the level
+   * @params {Number} areaNumber area number in the level
    * @params {Array} parentItems
    */
-  _checkTree(level, mortonNum, parentItems = []){
-    const idxQuaternaryTree = ((Math.pow(4, level)-1.0 ) / 3.0) + mortonNum;
+  _checkTree(level, areaNumber, parentItems = []){
+    const idxQuaternaryTree = ((Math.pow(4, level)-1.0 ) / 3.0) + areaNumber;
     const procMortonNode = this._linearQuaternaryTree[idxQuaternaryTree];
     const beforeParentCount = parentItems.length;
     if( !procMortonNode ) return;
@@ -253,7 +253,7 @@ export default class colisionDetector {
     }
 
     for( let j=0; j<4; j++ ){
-      this._checkTree(level+1, 4*mortonNum+j, parentItems);
+      this._checkTree(level + 1, 4 * areaNumber + j, parentItems);
     }
 
     parentItems.splice(beforeParentCount, parentItems.length - beforeParentCount);
@@ -367,7 +367,7 @@ export default class colisionDetector {
   /**
    * Convert grid position to the tree number
    */
-  _convPositionToMortonNumber(position){
+  _convPositionToGridNumber(position){
     let n = position[0];
     let m = position[1];
     n = (n | (n<<8)) & 16711935;
@@ -384,20 +384,20 @@ export default class colisionDetector {
   _convToAreaNumber(item){
     const itemPosition = [ [Math.floor((item.position[0]) / this._lowLevelCellSize[0]), Math.floor((item.position[1]) / this._lowLevelCellSize[1])],
       [Math.floor((item.position[0] + item.width) / this._lowLevelCellSize[0]), Math.floor((item.position[1] + item.height) / this._lowLevelCellSize[1])] ];
-    const cornerMortonNum = [this._convPositionToMortonNumber(itemPosition[0]), this._convPositionToMortonNumber(itemPosition[1])];
+    const cornerMortonNum = [this._convPositionToGridNumber(itemPosition[0]), this._convPositionToGridNumber(itemPosition[1])];
     const shiftNumber = cornerMortonNum[0] ^ cornerMortonNum[1];
     if( shiftNumber < 0 ) return null;
     const shiftAmont = (shiftNumber === 0) ? 0 : (Math.floor( Math.log(shiftNumber) / Math.log(4) ) + 1) * 2;
     let level = this._level - Math.floor(shiftAmont / 2.0);
-    let mortonNum = (cornerMortonNum[1] >> shiftAmont);
+    let areaNum = (cornerMortonNum[1] >> shiftAmont);
 
-    if( mortonNum < 0 || level < 0 ) {
-      mortonNum = 0;
+    if( areaNum < 0 || level < 0 ) {
+      areaNum = 0;
       level = 0;
     }
 
     return {
-      mortonNum: mortonNum,
+      areaNumber: areaNum,
       level: level
     };
   }
