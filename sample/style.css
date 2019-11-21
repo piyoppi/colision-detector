@@ -1,0 +1,14 @@
+body {
+  background-color: whitesmoke;
+}
+
+article {
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.field {
+  border: solid 1px gainsboro;
+  border-radius: 3px;
+  background-color: white;
+}
