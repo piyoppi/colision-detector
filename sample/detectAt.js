@@ -1,31 +1,11 @@
 import ColisionDetector from '../src/colisionDetector.js';
 
 const items = [
-  {
-    position: [100, 100],
-    width: 40,
-    height: 40
-  },
-  {
-    position: [400, 600],
-    width: 40,
-    height: 40
-  },
-  {
-    position: [200, 800],
-    width: 400,
-    height: 40
-  },
-  {
-    position: [300, 0],
-    width: 350,
-    height:  350
-  },
-  {
-    position: [10, 300],
-    width: 250,
-    height: 80 
-  }
+  { position: [100, 100], width: 40, height: 40 },
+  { position: [400, 600], width: 40, height: 40 },
+  { position: [200, 800], width: 400, height: 40 },
+  { position: [300, 0], width: 350, height:  350 },
+  { position: [10, 300], width: 250, height: 80 }
 ];
 
 const canvas = document.getElementById('field');
