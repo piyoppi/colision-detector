@@ -15,6 +15,8 @@ items.forEach( item => ctx.fillRect(item.position[0], item.position[1], item.wid
 
 const width = canvas.clientWidth;
 const height = canvas.clientHeight;
+
+// Initialize a detector
 const colisionDetector = new ColisionDetector(width, height, 2, items);
 
 document.addEventListener('keydown', e => {
@@ -35,8 +37,14 @@ document.addEventListener('keydown', e => {
     default:
       return;
   }
+
+  // Update colision detect tree
   colisionDetector.updateTree(player);
+
+  // Detect colision
   colisionDetector.detect(items);
+
+  // Display the result of detecting colisions
   items.forEach( item => {
     if( item.colisionState.colisions.length > 0 ) {
       ctx.fillStyle = 'rgba(255,150,0,1)';

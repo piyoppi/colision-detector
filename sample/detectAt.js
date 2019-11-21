@@ -14,6 +14,8 @@ items.forEach( item => ctx.fillRect(item.position[0], item.position[1], item.wid
 
 const width = canvas.clientWidth;
 const height = canvas.clientHeight;
+
+// Initialize a detector
 const colisionDetector = new ColisionDetector(width, height, 2, items);
 
 canvas.addEventListener('click', e => {
@@ -23,7 +25,10 @@ canvas.addEventListener('click', e => {
     e.pageY - clientRect.top - window.pageYOffset
   ];
 
+  // Detect clicked items
   const clickedItems = colisionDetector.detectAt({position, width: 2, height: 2});
+
+  // Display the result of detecting
   ctx.fillStyle = 'rgba(255,150,0,1)';
   clickedItems.forEach( item => ctx.fillRect(item.position[0], item.position[1], item.width, item.height) );
 });
