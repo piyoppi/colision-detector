@@ -1,4 +1,4 @@
-import ColisionDetector from './colisionDetector.js'
+import ColisionDetector from './../src/colisionDetector.js'
 
 describe('#_makeLinearQuaternaryTree', () => {
   it('generate linear quaternary tree when level is 2', () => {
@@ -27,18 +27,18 @@ describe('#_convPositionToGridNumber', () => {
 describe('#_convToAreaNumber', () => {
   it('calculate a valid number when maximum level is 2', () => {
     const colisionDetector = new ColisionDetector(800, 800, 2);
-    expect(colisionDetector._convToAreaNumber({position: [0, 0], width: 30, height: 30})).toEqual({mortonNum: 0, level: 2});
-    expect(colisionDetector._convToAreaNumber({position: [401, 401], width: 300, height: 300})).toEqual({mortonNum: 3, level: 1});
-    expect(colisionDetector._convToAreaNumber({position: [401, 0], width: 300, height: 300})).toEqual({mortonNum: 1, level: 1});
-    expect(colisionDetector._convToAreaNumber({position: [701, 701], width: 30, height: 30})).toEqual({mortonNum: 15, level: 2});
+    expect(colisionDetector._convToAreaNumber({position: [0, 0], width: 30, height: 30})).toEqual({areaNumber: 0, level: 2});
+    expect(colisionDetector._convToAreaNumber({position: [401, 401], width: 300, height: 300})).toEqual({areaNumber: 3, level: 1});
+    expect(colisionDetector._convToAreaNumber({position: [401, 0], width: 300, height: 300})).toEqual({areaNumber: 1, level: 1});
+    expect(colisionDetector._convToAreaNumber({position: [701, 701], width: 30, height: 30})).toEqual({areaNumber: 15, level: 2});
   });
 
   it('calculate a valid number when maximum level is 3', () => {
     const colisionDetector = new ColisionDetector(800, 800, 3);
-    expect(colisionDetector._convToAreaNumber({position: [0, 0], width: 30, height: 30})).toEqual({mortonNum: 0, level: 3});
-    expect(colisionDetector._convToAreaNumber({position: [401, 401], width: 300, height: 300})).toEqual({mortonNum: 3, level: 1});
-    expect(colisionDetector._convToAreaNumber({position: [401, 0], width: 300, height: 300})).toEqual({mortonNum: 1, level: 1});
-    expect(colisionDetector._convToAreaNumber({position: [701, 701], width: 30, height: 30})).toEqual({mortonNum: 63, level: 3});
+    expect(colisionDetector._convToAreaNumber({position: [0, 0], width: 30, height: 30})).toEqual({areaNumber: 0, level: 3});
+    expect(colisionDetector._convToAreaNumber({position: [401, 401], width: 300, height: 300})).toEqual({areaNumber: 3, level: 1});
+    expect(colisionDetector._convToAreaNumber({position: [401, 0], width: 300, height: 300})).toEqual({areaNumber: 1, level: 1});
+    expect(colisionDetector._convToAreaNumber({position: [701, 701], width: 30, height: 30})).toEqual({areaNumber: 63, level: 3});
   });
 });
 
