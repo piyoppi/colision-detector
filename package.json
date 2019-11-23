@@ -2,7 +2,7 @@
   "name": "@garakuta-toolbox/colision-detector",
   "version": "0.0.1",
   "description": "colision detection library for game development",
-  "main": "",
+  "main": "src/colisionDetector.js",
   "scripts": {
     "test": "jest -i"
   },
