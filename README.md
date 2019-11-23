@@ -21,7 +21,8 @@ const items = [
 ];
 
 //initialize
-const colisionDetector = new ColisionDetector(width, height, 2, items);
+const level = 2;  // level is the depth of quadtree. (1 or 2 or 3)
+const colisionDetector = new ColisionDetector(width, height, level, items);
 
 // detect at a specific rectangle.
 const clickedItems = colisionDetector.detectAt({position: [110, 110], width: 2, height: 2});
@@ -60,7 +61,8 @@ const items = [
 ];
 
 //initialize
-const colisionDetector = new ColisionDetector(width, height, 2, items);
+const level = 2;  // level is the depth of quadtree. (1 or 2 or 3)
+const colisionDetector = new ColisionDetector(width, height, level, items);
 
 // detect some colisions
 colisionDetector.detect(items);
