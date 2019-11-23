@@ -8,6 +8,9 @@
   },
   "author": "piyoppi",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.0",
     "@babel/preset-env": "^7.3.4",
