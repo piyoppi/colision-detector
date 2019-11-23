@@ -1,6 +1,6 @@
 {
   "name": "@piyoppi/colision-detector",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "colision detection library for game development",
   "main": "src/colisionDetector.js",
   "scripts": {
@@ -8,9 +8,6 @@
   },
   "author": "piyoppi",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "devDependencies": {
     "@babel/core": "^7.7.0",
     "@babel/preset-env": "^7.3.4",
