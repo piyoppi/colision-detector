@@ -1,6 +1,6 @@
 {
-  "name": "@garakuta-toolbox/colision-detector",
-  "version": "0.1.0",
+  "name": "@piyoppi/colision-detector",
+  "version": "0.1.1",
   "description": "colision detection library for game development",
   "main": "src/colisionDetector.js",
   "scripts": {
