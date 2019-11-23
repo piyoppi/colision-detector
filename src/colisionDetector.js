@@ -62,8 +62,6 @@ export default class colisionDetector {
 
     if( !item.colisionState ) {
       item.colisionState = {
-        isGround: false,
-        ignoreItemIds: [],
         colisions: [],
         treeIndex: -1
       }
@@ -134,7 +132,6 @@ export default class colisionDetector {
   detect(items){
     items.forEach( item => {
       item.colisionState.colisions = [];
-      item.colisionState.isGround = false;
     });
 
     this.initializeGroups();
