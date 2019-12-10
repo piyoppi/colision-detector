@@ -94,7 +94,7 @@ export default class colisionDetector {
     if( isRemoveOnly ) return;
 
     let settingId;
-    if ((typeof item.colisionState.colisionId !== 'undefined') || (item.colisionState.colisionId < 0)) {
+    if ((typeof item.colisionState.colisionId !== 'undefined') && (item.colisionState.colisionId >= 0)) {
       settingId = item.colisionState.colisionId;
     } else {
       settingId = this._numberingColisionIdCounter++;

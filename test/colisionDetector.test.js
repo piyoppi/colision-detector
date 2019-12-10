@@ -169,6 +169,35 @@ describe('#updateTree', () => {
     expect(colisionDetector._linearQuaternaryTree[5].length).toEqual(0);
     expect(colisionDetector._linearQuaternaryTree[10].length).toEqual(1);
   });
+
+  it('should allocate colisionId when given items colisionId is less than zero', () => {
+    const item1 = {
+      position: [100, 100],
+      width: 30,
+      height: 30,
+      colisionState: {
+        colisionId: -1
+      }
+    }
+    const colisionDetector = new ColisionDetector(800, 800, 2);
+    colisionDetector.updateTree(item1);
+    console.log(item1);
+    expect(item1.colisionState.colisionId).not.toEqual(-1);
+  });
+
+  it('keep colisionId when given items colisionId is over than zero', () => {
+    const item1 = {
+      position: [100, 100],
+      width: 30,
+      height: 30,
+      colisionState: {
+        colisionId: 1
+      }
+    }
+    const colisionDetector = new ColisionDetector(800, 800, 2);
+    colisionDetector.updateTree(item1);
+    expect(item1.colisionState.colisionId).toEqual(1);
+  });
 });
 
 describe('#detect', () => {
