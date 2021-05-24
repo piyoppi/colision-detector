@@ -1,5 +1,5 @@
 # Colision-Detector
-[![CircleCI](https://circleci.com/gh/piyoppi/colision-detector.svg?style=svg)](https://circleci.com/gh/piyoppi/colision-detector)
+[![CI](https://github.com/piyoppi/colision-detector/actions/workflows/ci.yml/badge.svg)](https://github.com/piyoppi/colision-detector/actions/workflows/ci.yml)
 
 The colision detection library for game development.
 
