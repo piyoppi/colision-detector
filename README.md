@@ -5,7 +5,7 @@ The colision detection library for game development.
 
 ## Sample
 See below a website.
-- https://garakuta-toolbox.com/colision-detector/sample/
+- https://piyoppi.github.io/colision-detector/sample/
 
 ## Usage
 
